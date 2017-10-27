@@ -7,7 +7,7 @@ from tinderpy import User
 import time
 
 
-user = User('PLEASE PLACE YOUR X-AUTH-TOKEN HERE')
+user = User('X-AUTH-TOKEN HERE')
 print("Welcome %s" % user.name())
 
 # collect list of newly added nearby matches and put them in matches var

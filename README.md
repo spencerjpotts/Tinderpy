@@ -1,6 +1,6 @@
 # Tinderpy
 
-'Who needs tinder select! When you have Tinderpy'
+Who needs Tinder Select! When you have Tinderpy.
 
 ## Getting Started
 
@@ -8,10 +8,18 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 # Discord
- [Join the Discord](https://discord.gg/bSbFQEr)
+ [Join the Discord](https://discord.gg/262RFta)
 
-# Usage
- Must obtain your valid x_auth_token, if you're not sure how to obtain the token please read below for further information about obtaining token.
+ 
+### Prerequisites
+
+
+```
+Python~2.7
+    @requests
+```
+## x-auth-token
+Must obtain your valid x_auth_token, if you're not sure how to obtain the token please read below for further information about obtaining x-auth-token.
  
 
  
@@ -24,24 +32,27 @@ These instructions will get you a copy of the project up and running on your loc
  
     PLEASE TREAT THE X_AUTH_TOKEN AS YOU WOULD LIKE A PASSWORD
 
-### Prerequisites
-
-
-```
-Python~2.7
-    @requests
-```
-
 ### Installing
 
 
 
 ## Running the test bot
+### Example test code of Tinderpy auto liking users once every second
 
-Explain how to run the automated tests for this system
+Open test.py using your favorite text editor, use previously obtained x-auth-token and replace it as the parameter in the User() class
 
+```python
+user = User('X-AUTH-TOKEN HERE')
+```
+Save test.py and proceed with executing the python script
+
+    C://FOLDERLOCATION/ python test.py
+    
+# Documentation
+## Refer to wiki
+[Tinderpy Wiki]()
+    
 ## Contributing
-
 Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
 
 
