@@ -32,7 +32,7 @@ Make sure python/pip is a part of the environment variable PATH!
 For more documentation on [Python Requests Doc](http://docs.python-requests.org)
         
 ## x-auth-token
-Must obtain your valid x_auth_token, if you're not sure how to obtain the token please read below for further information about obtaining x-auth-token.
+Must obtain your valid **_x_auth_token_**, if you're not sure how to obtain the token please read below for further information about obtaining x-auth-token.
  
 
  
