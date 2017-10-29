@@ -36,7 +36,6 @@ TTTTTT  T:::::T  TTTTTTiiiiiiinnnn  nnnnnnnn        ddddddddd:::::d     eeeeeeee
 # Version: v0.1
 
 
-
 import json
 import requests
 
@@ -57,7 +56,7 @@ class User:
         Obtain a new tinder list of matches based on your tinder settings location
         retrieve raw tinder list and populate array with each list item
         api.gotinder.com/recs/core GETS 10 user match objects with all user data for necessary actions like swiping,
-        private messaging, removing from your matches list etc..
+        private messaging etc..
         data contains id's, images, distance, age, name etc..
         one data is obtained in raw format use json.loads to parse it into json format for usage
         return array
@@ -86,6 +85,13 @@ class User:
             return processed['data']['user']
 
     def like(self, _id):
+        """
+        like(_id) => json response
+        http request /api.gotinder.com/like/[USER_ID] will perform the Tinder like action (Swipe right) 
+        on the user with the passed _id
+        :param _id: 
+        :return: 
+        """
         raw = self.session.request('GET',
                                    'https://api.gotinder.com/like/%s' % _id,
                                    data={'locale': 'en'},
@@ -102,7 +108,11 @@ class User:
         return self.user()['pos']
 
     def gender(self):
-        return self.user()['gender']
+        gender = self.user()['gender']
+        if gender is 0:
+            return "Male"
+        elif gender is 1:
+            return "Female"
 
     def age_filter_min(self):
         return self.user()['age_filter_min']

@@ -3,15 +3,16 @@
     Example of Tinderpy auto liking users once every second
 '''
 
-from tinderpy import User
 import time
+from tinderpy import User
 
 
-user = User('X-AUTH-TOKEN HERE')
-print("Welcome %s" % user.name())
+user = User('X-AUTH-TOKEN')
+
+print("[!] Welcome %s" % user.name())
 
 # collect list of newly added nearby matches and put them in matches var
-matches = user.subjects()  # user.subjects() returns array of objects
+matches = user.subjects()  # user.subjects() returns array of match objects
 
 # Iterate over each individual user in matches[] and pass their id into the like def
 for match in matches:
