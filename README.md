@@ -8,18 +8,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 # Discord
+**Join our community and start contributing and sharing!**
+ 
  [Join the Discord](https://discord.gg/262RFta)
 
  
-### Prerequisites
+# Prerequisites
 ## Python
-please ensure you have Python installed on your system.
+Please ensure you have Python installed on your system.
 IF you are not sure how to install Python visit [python.org](https://www.python.org/) for installation steps
 
 ```
 Python~2.7
     @requests
 ```
+
 ### Requests package
 Tinderpy uses pythons requests package, to install requests:
 
@@ -36,10 +39,14 @@ Must obtain your valid **_x_auth_token_**, if you're not sure how to obtain the 
  
 
  
- To obtain your **x_auth_token** Visit your preferred browser (I'm using chrome in the image below) **>** **_Open Web developer_** with **_F12_** or **_Settings_** **>** **_More tools_** **>** **_Developer Tools._**
+ To obtain your **x_auth_token** Visit your preferred browser (I'm using chrome in the image below) continue to login at [Tinder.com](https://tinder.com) 
+ 
+ (You may need to refresh the page for developer console to recapture http events) 
+ 
+ **_Open Web developer_** with **_F12_** or **_Settings_** **>** **_More tools_** **>** **_Developer Tools._**
  
  Once open, you can now navigate to the **_Network tab_**. 
- When in the Network tab locate the left box and find the request that looks like this **_/profile?include=user_**  and click to access its content.
+ When in the Network tab locate the left box and find the request that looks like this **_/profile?include=user_** or scroll down and click links until you find **_x-auth-token_** and click to access its content.
   
  Next to it will be some drop down lists of the headers now find the Request header and look for '**_x-auth-token_**' the corresponding value in the x-auth-token key is your user token what you will need for **_Tinderpy_** to function.
  
@@ -48,12 +55,9 @@ Must obtain your valid **_x_auth_token_**, if you're not sure how to obtain the 
  
     PLEASE TREAT THE X_AUTH_TOKEN AS YOU WOULD LIKE A PASSWORD
 
-### Installing
-
-
 
 ## Running the test bot
-### Example test code of Tinderpy auto liking users once every second
+### Example Test code of Tinderpy Auto liking users once every second
 Once you have downloaded a copy of Tinderpy, navigate to the downloaded directory.
 Open test.py using your favorite text editor and use previously obtained x-auth-token as the parameter in the User() class
 
@@ -91,10 +95,10 @@ See also the list of [contributors](https://github.com/spencerjpotts/Tinderpy/co
 
  
 # Bugs / Issues
-If you find a bug in the bot, please search our issue tracker first. If it has not been reported, please create a new issue so that our team can assist you as quickly as possible.
+If you find a bug in the bot, please search our issue tracker first. If it has not been reported, please create a new issue so that our team 'I' can assist you as quickly as possible.
 
 
 # Disclaimer
-Tinderpy is intended for academic purposes and should not be used as it violates the TOS and is unfair to the community. 
+**_Tinderpy_** is intended for academic purposes and should not be used as it violates the TOS and is unfair to the community. 
 
-Use the bot at your own risk.
+**_Use the bot at your own risk._**
