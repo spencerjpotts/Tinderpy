@@ -53,14 +53,14 @@ class User:
         """
         subject([radius, ]) => array[]
         
-        Obtain a new tinder list of matches based on your tinder settings location
+        GETS a new tinder list of matches based on your tinder settings location
         retrieve raw tinder list and populate array with each list item
-        api.gotinder.com/recs/core GETS 10 user match objects with all user data for necessary actions like swiping,
+        api.gotinder.com/recs/core GETS 10 user(s) match objects with all user data for necessary actions like swiping,
         private messaging etc..
         data contains id's, images, distance, age, name etc..
-        one data is obtained in raw format use json.loads to parse it into json format for usage
-        return array
-        :return: [10]
+        data is obtained in raw text format, use json.loads to parse it into json format for iterations
+        return array json objects
+        :return: [10]{}
         """
         raw = self.session.request('GET',
                                    'https://api.gotinder.com/recs/core?locale=en/',
@@ -74,7 +74,7 @@ class User:
     def user(self):
         """
         user() => json.object
-        Obtains the logged users data, retrieves a text based format, what's parsed into json format for iteration
+        GETS the logged users data, retrieves a text based format, what's parsed into json format for iteration
         :return: user.json 
         """
         raw = self.session.request('GET',
@@ -89,11 +89,25 @@ class User:
         like(_id) => json response
         http request /api.gotinder.com/like/[USER_ID] will perform the Tinder like action (Swipe right) 
         on the user with the passed _id
-        :param _id: 
-        :return: 
+        :param _id: String
+        :return: json
         """
         raw = self.session.request('GET',
                                    'https://api.gotinder.com/like/%s' % _id,
+                                   data={'locale': 'en'},
+                                   headers={'x-auth-token': self.x_auth_token})
+        return json.loads(raw.text)
+
+    def dislike(self, _id):
+        """
+        dislike(_id) => json response
+        http request https://api.go.tinder.com/dislike/[USER_ID] will perform the dislike || pass user action 
+        on the user with the passed _id
+        :param _id: String
+        :return: json
+        """
+        raw = self.session.request('GET',
+                                   'https://api.gotinder.com/pass/%s' % _id,
                                    data={'locale': 'en'},
                                    headers={'x-auth-token': self.x_auth_token})
         return json.loads(raw.text)
@@ -107,11 +121,11 @@ class User:
     def position(self):
         return self.user()['pos']
 
-    def gender(self):
+    def gender(self):  # gets the gender M/F
         gender = self.user()['gender']
-        if gender is 0:
+        if gender is 0:  # Male
             return "Male"
-        elif gender is 1:
+        elif gender is 1:  # Female
             return "Female"
 
     def age_filter_min(self):
