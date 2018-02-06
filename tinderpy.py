@@ -164,6 +164,6 @@ class User:
         for school in schools:
             arr.append(school)
         return arr
-
+   
     def discoverable(self):
         return self.user()['discoverable']
