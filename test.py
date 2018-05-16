@@ -33,3 +33,10 @@ while True:
 
         # Sleep for one second
         time.sleep(1)
+"""
+get match list and message example; remove comments.
+"""
+# for match in user.matches(count=1):
+    # print("You messaged ", match['person']['name'])
+    # msg_info = user.message_match(match['person']['_id'], "Hey")
+    # print(msg_info)
