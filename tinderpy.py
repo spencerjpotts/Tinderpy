@@ -49,7 +49,7 @@ class User:
     def __init__(self, token):
         self.x_auth_token = token
 
-    def subjects(self):
+    def discovery(self):
         """
         subject([radius, ]) => array[]
         
@@ -111,7 +111,27 @@ class User:
                                    data={'locale': 'en'},
                                    headers={'x-auth-token': self.x_auth_token})
         return json.loads(raw.text)
+      
+    def matches(self, count=60):
+        raw = self.session.request('GET',
+                                   'https://api.gotinder.com/v2/matches?count={0}&locale=en'.format(count),
+                                   headers={'x-auth-token': self.x_auth_token})
+        return json.loads(raw.text)['data']['matches']
+      
+    def message_match(self, match_id, message):
+        message_data = {
+            'matchId': match_id + self.user()['_id'],  # Composite key 'private chat key'
+            'message': message,
+            'userId': match_id
+        }
 
+        if isinstance(message, str):
+            raw = self.session.request('POST',
+                                       'https://api.gotinder.com/user/matches/{0}?locale=en'.format(message_data['matchId']),
+                                       headers={'x-auth-token': self.x_auth_token},
+                                       data=message_data)
+            return json.loads(raw.text)
+          
     def _id(self):
         return self.user()['_id']
 
