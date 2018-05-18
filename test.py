@@ -16,7 +16,7 @@ print("[!] Welcome %s" % user.name())
 while True:
 
     # collect list of newly added nearby matches and put them in matches var
-    matches = user.subjects()  # user.subjects() returns array of match objects
+    matches = user.discovery()  # user.subjects() returns array of match objects
 
     for match in matches:
 
