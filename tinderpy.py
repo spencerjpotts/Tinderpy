@@ -29,11 +29,8 @@ TTTTTT  T:::::T  TTTTTTiiiiiiinnnn  nnnnnnnn        ddddddddd:::::d     eeeeeeee
 
 
 # Author: Spencer J Potts
-# Description:
-#
-#
-# Date:
-# Version: v0.1
+# Description: Automates tinder functionality.
+# Date: 5/20/2018
 
 
 import json
@@ -49,9 +46,9 @@ class User:
     def __init__(self, token):
         self.x_auth_token = token
 
-    def discovery(self):
+    def discovery(self, location=None):
         """
-        subject([radius, ]) => array[]
+        discovery([radius, ]) => array[]
         
         GETS a new tinder list of matches based on your tinder settings location
         retrieve raw tinder list and populate array with each list item
