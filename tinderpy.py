@@ -30,9 +30,9 @@ TTTTTT  T:::::T  TTTTTTiiiiiiinnnn  nnnnnnnn        ddddddddd:::::d     eeeeeeee
 
 # Author: Spencer J Potts
 # Description: Automates tinder functionality.
-# Date: 5/20/2018
+# Date: 5/22/2018
 
-
+import sys
 import json
 import requests
 
@@ -48,7 +48,7 @@ class User:
 
     def discovery(self, location=None):
         """
-        discovery([radius, ]) => array[]
+        discovery([location]) => array[]
         
         GETS a new tinder list of matches based on your tinder settings location
         retrieve raw tinder list and populate array with each list item
@@ -59,6 +59,7 @@ class User:
         return array json objects
         :return: [10]{}
         """
+
         raw = self.session.request('GET',
                                    'https://api.gotinder.com/recs/core?locale=en/',
                                    headers={'x-auth-token': self.x_auth_token})
@@ -128,7 +129,19 @@ class User:
                                        headers={'x-auth-token': self.x_auth_token},
                                        data=message_data)
             return json.loads(raw.text)
-          
+
+    def delete_match(self, match_id):
+        """
+        https://api.gotinder.com/user/matches/58184467ae89a221608cc21c5af27f7596aa953f6d0c7e0e?locale=en
+        :return:
+        """
+        raw = self.session.request('DELETE',
+                                   'https://api.gotinder.com/user/matches/{0}'.format(match_id),
+                                   data={'locale': 'en'},
+                                   headers={'x-auth-token': self.x_auth_token})
+
+        return json.loads(raw.text)
+
     def _id(self):
         return self.user()['_id']
 
