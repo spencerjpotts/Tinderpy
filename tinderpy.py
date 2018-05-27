@@ -96,6 +96,20 @@ class User:
                                    headers={'x-auth-token': self.x_auth_token})
         return json.loads(raw.text)
 
+    def super_like(self, _id):
+        raw = self.session.request('POST',
+                                   'https://api.gotinder.com/like/{0}/super'.format(_id),
+                                   data={'locale': 'en'},
+                                   headers={'x-auth-token': self.x_auth_token})
+        return json.loads(raw.text)
+
+    def remove_super_like(self, _id):
+        raw = self.session.request('DELETE',
+                                   'https://api.gotinder.com/like/{0}/super'.format(_id),
+                                   data={'locale': 'en'},
+                                   headers={'x-auth-token': self.x_auth_token})
+        return json.loads(raw.text)
+
     def dislike(self, _id):
         """
         dislike(_id) => json response
@@ -115,6 +129,13 @@ class User:
                                    'https://api.gotinder.com/v2/matches?count={0}&locale=en'.format(count),
                                    headers={'x-auth-token': self.x_auth_token})
         return json.loads(raw.text)['data']['matches']
+
+    def fast_match(self, count=20):
+        raw = self.session.request('GET',
+                                   'https://api.gotinder.com/v2/fast-match?count=20&locale=en',
+                                   headers={'x-auth-token': self.x_auth_token},
+                                   data={'count': count, 'locale': 'en'})
+        return json.loads(raw.text)
       
     def message_match(self, match_id, message):
         message_data = {
