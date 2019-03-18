@@ -36,6 +36,36 @@ import sys
 import json
 import requests
 
+class Match(object):
+    def __init__(self, parent,  match):
+        self.parent = parent
+        self.session = parent.session
+        self.uId = match['person']['_id']
+        self.matchId = match['id']
+
+        self.name = match['person']['name']
+        self.gender = match['person']['gender']
+        self.messages = match['messages']
+        
+
+    def message(self, msg):
+        messageData = {
+            "matchId": self.matchId,
+            "message": msg,
+            "userId": self.parent._id()
+        }
+        raw = self.session.request('POST',
+                                    'https://api.gotinder.com/user/matches/{0}?locale=en'.format(self.matchId),
+                                    headers={'x-auth-token': self.parent.x_auth_token},
+                                    data=messageData)
+        return raw.json()
+
+    def remove(self, ):
+        raw = self.session.request('DELETE',
+                                   'https://api.gotinder.com/user/matches/{0}?locale=en'.format(self.matchId),
+                                    headers={'x-auth-token': self.parent.x_auth_token})
+        return raw.json()
+
 
 class User:
     """
@@ -128,40 +158,11 @@ class User:
         raw = self.session.request('GET',
                                    'https://api.gotinder.com/v2/matches?count={0}&locale=en'.format(count),
                                    headers={'x-auth-token': self.x_auth_token})
-        return json.loads(raw.text)['data']['matches']
-
-    def fast_match(self, count=20):
-        raw = self.session.request('GET',
-                                   'https://api.gotinder.com/v2/fast-match?count=20&locale=en',
-                                   headers={'x-auth-token': self.x_auth_token},
-                                   data={'count': count, 'locale': 'en'})
-        return json.loads(raw.text)
-      
-    def message_match(self, match_id, message):
-        message_data = {
-            'matchId': match_id + self.user()['_id'],  # Composite key 'private chat key'
-            'message': message,
-            'userId': match_id
-        }
-
-        if isinstance(message, str):
-            raw = self.session.request('POST',
-                                       'https://api.gotinder.com/user/matches/{0}?locale=en'.format(message_data['matchId']),
-                                       headers={'x-auth-token': self.x_auth_token},
-                                       data=message_data)
-            return json.loads(raw.text)
-
-    def delete_match(self, match_id):
-        """
-        https://api.gotinder.com/user/matches/58184467ae89a221608cc21c5af27f7596aa953f6d0c7e0e?locale=en
-        :return:
-        """
-        raw = self.session.request('DELETE',
-                                   'https://api.gotinder.com/user/matches/{0}'.format(match_id),
-                                   data={'locale': 'en'},
-                                   headers={'x-auth-token': self.x_auth_token})
-
-        return json.loads(raw.text)
+        matches = json.loads(raw.text)['data']['matches']
+        arr = []
+        for match in matches:
+            arr.append(Match(self, match))
+        return arr
 
     def _id(self):
         return self.user()['_id']
