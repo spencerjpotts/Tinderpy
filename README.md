@@ -111,4 +111,4 @@ If you find a bug in the bot, please search our issue tracker first. If it has n
 [![](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NUM5LS6HQ5CCQ&currency_code=AUD&source=url)
 
 
-[![](https://bitcoin.org/img/icons/logotop.svg?1552961160)](bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe)
+[![](https://www.blockchain.com/Resources/buttons/donate_64.png)](bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe)
