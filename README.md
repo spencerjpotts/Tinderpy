@@ -78,6 +78,10 @@ Once inside run this command to start the Tinderpy test.py script
 # Documentation
 ## Quick Reference
 ```python
+    # Auto swipe discovered profiles.
+
+    # message match example.
+    
 
 ```
 ## Refer to wiki
@@ -105,3 +109,6 @@ If you find a bug in the bot, please search our issue tracker first. If it has n
 
 # Donate
 [![](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NUM5LS6HQ5CCQ&currency_code=AUD&source=url)
+
+
+[![](https://bitcoin.org/img/icons/logotop.svg?1552961160)](bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe)
