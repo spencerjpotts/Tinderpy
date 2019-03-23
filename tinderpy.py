@@ -24,13 +24,13 @@ TTTTTT  T:::::T  TTTTTTiiiiiiinnnn  nnnnnnnn        ddddddddd:::::d     eeeeeeee
                                                                                                             p:::::::p           y:::::y               
                                                                                                             p:::::::p          yyyyyyy                
                                                                                                             ppppppppp                                 
-    Generated with http://patorjk.com/software/taag/                                                                                                                                                  
+    Generated with http://patorjk.com/software/taag/
+
+    @Author: Spencer J Potts
+    @Description: Automates tinder functionality.
+    @Date: 5/22/2018                                                                                                                                 
+
 """
-
-
-# Author: Spencer J Potts
-# Description: Automates tinder functionality.
-# Date: 5/22/2018
 
 import sys
 import json
@@ -67,6 +67,24 @@ class Match(object):
         return raw.json()
 
 
+class Profile:
+    """
+    docstring
+    """
+    def __init__(self, data):
+        self.id = data['_id']
+        self.name = data['name']
+        self.bio = data['bio']
+        self.birthdate = data['birth_date']
+        self.jobs = data['jobs']
+        self.schools = data['schools']
+        self.gender = data['gender'] # female=1, male=0
+        self.distance = data['distance_mi']
+    
+    def __str__(self):
+        return self.id
+
+
 class User:
     """
     
@@ -76,18 +94,9 @@ class User:
     def __init__(self, token):
         self.x_auth_token = token
 
-    def discovery(self, location=None):
+    def discovery(self):
         """
-        discovery([location]) => array[]
-        
-        GETS a new tinder list of matches based on your tinder settings location
-        retrieve raw tinder list and populate array with each list item
-        api.gotinder.com/recs/core GETS 10 user(s) match objects with all user data for necessary actions like swiping,
-        private messaging etc..
-        data contains id's, images, distance, age, name etc..
-        data is obtained in raw text format, use json.loads to parse it into json format for iterations
-        return array json objects
-        :return: [10]{}
+        discovery() => array[]
         """
 
         raw = self.session.request('GET',
@@ -96,7 +105,7 @@ class User:
         processed = json.loads(raw.text)
         arr = []
         for user in processed['results']:
-            arr.append(user)
+            arr.append(Profile(user))
         return arr
 
     def user(self):
@@ -124,7 +133,13 @@ class User:
                                    'https://api.gotinder.com/like/%s' % _id,
                                    data={'locale': 'en'},
                                    headers={'x-auth-token': self.x_auth_token})
-        return json.loads(raw.text)
+
+        processed = json.loads(raw.text)
+
+        # remove X-Padding from raw.text
+        del processed['X-Padding']
+
+        return processed
 
     def super_like(self, _id):
         raw = self.session.request('POST',
