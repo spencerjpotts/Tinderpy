@@ -9,7 +9,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 # Discord
 **Join our community and start contributing and sharing!**
- 
+
+ [![](https://discordapp.com/api/guilds/336642139381301249/embed.png)](https://discord.gg/r3sSKJJ)
+
  [Join the Discord](https://discord.gg/262RFta)
 
  
