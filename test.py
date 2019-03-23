@@ -7,23 +7,33 @@ import time
 import tinderpy
 
 
-user = tinderpy.User('X-AUTH-TOKEN')
+
+user = tinderpy.User('e5419895-d2e9-4a35-a235-1cfcc96bbf3f')
 
 print("[!] Welcome %s" % user.name())
 
+
+# loop will run for ever
 while True:
-    matches = user.discovery()  # user.subjects() returns array of match objects
-    for match in matches:
-        # Like user with ID
-        user.like(match['_id'])
 
-        # Print name of the user just liked and print a message ''EMPTY BIO'' if the persons bio was empty
-        print("""
-           -----------------------------
-           Name: %s
-           Bio: %s
-           -----------------------------
-           """ % (match['name'], match['bio'] if len(match['bio']) > 0 else "EMPTY BIO"))
+    # user.discovery() returns array of match json objects
+    discovery = user.discovery()
 
-        # Sleep for one second
-        time.sleep(1)
+    # Loop over each person/profile class/object in the discovery array.
+    for person in discovery:
+
+        # liking a profile is simple. Just call the user.like() method
+        # and pass the discovered array populated with 'Profile' classes/objects
+        # A 'Profile' class/object will return its self ID.
+        user.like(person)
+        like_response = user.like(person)
+        
+        # Log some Profile/persons information to the console. 
+        print("ID: {0}\nName: {1}\nBio: {2}".format(person, person.name, person.bio))
+
+        # print 'like' http request response to the console.
+        print(like_response)
+
+        # cause flow of script to sleep for 3seconds to help http request loading not get flooded
+        # and cause suspicious activity.
+        time.sleep(3)
