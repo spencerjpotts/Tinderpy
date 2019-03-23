@@ -8,7 +8,7 @@ import tinderpy
 
 
 
-user = tinderpy.User('e5419895-d2e9-4a35-a235-1cfcc96bbf3f')
+user = tinderpy.User('TOKEN HERE')
 
 print("[!] Welcome %s" % user.name())
 
