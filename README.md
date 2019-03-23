@@ -114,4 +114,4 @@ If you find a bug in the bot, please search our issue tracker first. If it has n
 [![](https://www.blockchain.com/Resources/buttons/donate_64.png)](bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe)
 
 **_If clicking on the line above does not work, use this payment info:
-Pay to:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe._**
+Pay bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe._**
