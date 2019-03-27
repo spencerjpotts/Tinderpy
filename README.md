@@ -80,9 +80,20 @@ Once inside run this command to start the Tinderpy test.py script
 # Documentation
 ## Quick Reference
 ```python
-    # Auto swipe discovered profiles.
 
-    # message match example.
+    # Auto swipe discovered profiles.
+    profiles = user.discovery()
+    for profile in profiles:
+        user.like(profile)
+        time.sleep(2)
+
+    # message match example
+    # example here will message all the matches you have if they have zero messages.
+    matches = user.matches()
+    for match in user.matches():
+        if len(match.messages) <= 0:
+            match.message("Hello :).")
+            time.sleep(3)
     
 
 ```
@@ -111,9 +122,3 @@ If you find a bug in the bot, please search our issue tracker first. If it has n
 
 # Donate
 [![](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NUM5LS6HQ5CCQ&currency_code=AUD&source=url)
-
-
-[![](https://www.blockchain.com/Resources/buttons/donate_64.png)](bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe)
-
-**_If clicking on the line above does not work, use this payment info:
-Pay bitcoin:1GSWq6JPC46q9kZeEJzqBDigpAJ9mD9Dbe._**
