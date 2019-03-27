@@ -108,12 +108,8 @@ class User:
         return self.user['pos']
 
     @property
-    def gender(self):  # gets the gender M/F
+    def gender(self):
         gender = self.user['gender']
-        # if gender is 0:  # Male
-        #     return "Male"
-        # elif gender is 1:  # Female
-        #     return "Female"
         return "Female" if gender is 1 else "male"
 
     @property
@@ -136,27 +132,19 @@ class User:
     @property
     def photos(self):
         photos = self.user['photos']
-        # arr = []
-        # for photo in photos:
-        #     arr.append(photo)
         return [photo for photo in photos]
 
+    @property
     def jobs(self):
         jobs = self.user['jobs']
-        # arr = []
-        # for job in jobs:
-        #     arr.append(job)
-        # return arr
         return [job for job in jobs]
 
+    @property
     def schools(self):
         schools = self.user['schools']
-        # arr = []
-        # for school in schools:
-        #     arr.append(school)
-        # return arr
         return [school for school in schools]
    
+    @property
     def discoverable(self):
         return self.user['discoverable']
 
