@@ -22,14 +22,16 @@ class User:
     def __init__(self, token):
         self.session = requests.session()
         self.x_auth_token = token
+        self.headers = {'x-auth-token': token}
+        self.base_address = 'https://api.gotinder.com'
 
     def discovery(self):
         """
         discovery() => array[]
         """
         raw = self.session.request('GET', 
-                                   'https://api.gotinder.com/recs/core?locale=en/',
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   '{0}/recs/core?locale=en/'.format(self.base_address),
+                                   headers=self.headers)
         processed = json.loads(raw.text)
         return [Profile(user) for user in processed['results']]
 
@@ -41,8 +43,8 @@ class User:
         :return: user.json 
         """
         raw = self.session.request('GET',
-                                   'https://api.gotinder.com/v2/profile?include=user',
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   '{0}/v2/profile?include=user'.format(self.base_address),
+                                   headers=self.headers)
         processed = json.loads(raw.text)
         if processed['meta']['status'] is 200:
             return processed['data']['user']
@@ -56,9 +58,9 @@ class User:
         :return: json
         """
         raw = self.session.request('GET',
-                                   'https://api.gotinder.com/like/%s' % _id,
+                                   '{0}/like/{1}'.format(self.base_address, _id),
                                    data={'locale': 'en'},
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   headers=self.headers)
 
         processed = json.loads(raw.text)
 
@@ -69,29 +71,29 @@ class User:
 
     def super_like(self, _id):
         raw = self.session.request('POST',
-                                   'https://api.gotinder.com/like/{0}/super'.format(_id),
+                                   '{0}/like/{1}/super'.format(self.base_address, _id),
                                    data={'locale': 'en'},
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   headers=self.headers)
         return json.loads(raw.text)
 
     def remove_super_like(self, _id):
         raw = self.session.request('DELETE',
-                                   'https://api.gotinder.com/like/{0}/super'.format(_id),
+                                   '{0}/like/{1}/super'.format(self.base_address, _id),
                                    data={'locale': 'en'},
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   headers=self.headers)
         return json.loads(raw.text)
 
     def dislike(self, _id):
         raw = self.session.request('GET',
-                                   'https://api.gotinder.com/pass/%s' % _id,
+                                   '{0}/pass/{1}'.format(self.base_address, _id),
                                    data={'locale': 'en'},
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   headers=self.headers)
         return json.loads(raw.text)
       
     def matches(self, count=60):
         raw = self.session.request('GET',
-                                   'https://api.gotinder.com/v2/matches?count={0}&locale=en'.format(count),
-                                   headers={'x-auth-token': self.x_auth_token})
+                                   '{0}/v2/matches?count={1}&locale=en'.format(self.base_address, count),
+                                   headers=self.headers)
         matches = json.loads(raw.text)['data']['matches']
         return [Match(self, match) for match in matches]
 
