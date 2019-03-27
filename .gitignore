@@ -1,6 +1,5 @@
 .idea/
 __pycache__/
 tinderpy.pyc
-fiddle.json
 venv/
 test.py
