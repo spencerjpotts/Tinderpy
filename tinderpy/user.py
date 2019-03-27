@@ -18,19 +18,20 @@ class User:
     """
     
     """
-
+    BASE_ADDRESS = 'https://api.gotinder.com'
+    
     def __init__(self, token):
         self.session = requests.session()
         self.x_auth_token = token
         self.headers = {'x-auth-token': token}
-        self.base_address = 'https://api.gotinder.com'
+        
 
     def discovery(self):
         """
         discovery() => array[]
         """
         raw = self.session.request('GET', 
-                                   '{0}/recs/core?locale=en/'.format(self.base_address),
+                                   '{0}/recs/core?locale=en/'.format(self.BASE_ADDRESS),
                                    headers=self.headers)
         processed = json.loads(raw.text)
         return [Profile(user) for user in processed['results']]
@@ -43,7 +44,7 @@ class User:
         :return: user.json 
         """
         raw = self.session.request('GET',
-                                   '{0}/v2/profile?include=user'.format(self.base_address),
+                                   '{0}/v2/profile?include=user'.format(self.BASE_ADDRESS),
                                    headers=self.headers)
         processed = json.loads(raw.text)
         if processed['meta']['status'] is 200:
@@ -58,7 +59,7 @@ class User:
         :return: json
         """
         raw = self.session.request('GET',
-                                   '{0}/like/{1}'.format(self.base_address, _id),
+                                   '{0}/like/{1}'.format(self.BASE_ADDRESS, _id),
                                    data={'locale': 'en'},
                                    headers=self.headers)
 
@@ -71,28 +72,28 @@ class User:
 
     def super_like(self, _id):
         raw = self.session.request('POST',
-                                   '{0}/like/{1}/super'.format(self.base_address, _id),
+                                   '{0}/like/{1}/super'.format(self.BASE_ADDRESS, _id),
                                    data={'locale': 'en'},
                                    headers=self.headers)
         return json.loads(raw.text)
 
     def remove_super_like(self, _id):
         raw = self.session.request('DELETE',
-                                   '{0}/like/{1}/super'.format(self.base_address, _id),
+                                   '{0}/like/{1}/super'.format(self.BASE_ADDRESS, _id),
                                    data={'locale': 'en'},
                                    headers=self.headers)
         return json.loads(raw.text)
 
     def dislike(self, _id):
         raw = self.session.request('GET',
-                                   '{0}/pass/{1}'.format(self.base_address, _id),
+                                   '{0}/pass/{1}'.format(self.BASE_ADDRESS, _id),
                                    data={'locale': 'en'},
                                    headers=self.headers)
         return json.loads(raw.text)
       
     def matches(self, count=60):
         raw = self.session.request('GET',
-                                   '{0}/v2/matches?count={1}&locale=en'.format(self.base_address, count),
+                                   '{0}/v2/matches?count={1}&locale=en'.format(self.BASE_ADDRESS, count),
                                    headers=self.headers)
         matches = json.loads(raw.text)['data']['matches']
         return [Match(self, match) for match in matches]

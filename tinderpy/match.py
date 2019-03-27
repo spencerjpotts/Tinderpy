@@ -33,7 +33,7 @@ class Match(object):
     @property
     def messages(self):
         raw = self.session.request('GET', 
-                                   '{0}/v2/matches/{1}/messages?count=100&locale=en'.format(self.parent.base_address, self.id), 
+                                   '{0}/v2/matches/{1}/messages?count=100&locale=en'.format(self.parent.BASE_ADDRESS, self.id), 
                                    headers=self.parent.headers)
         
         return [MessageTemplate(data) for data in raw.json()['data']['messages']][::-1]
@@ -45,14 +45,14 @@ class Match(object):
             "userId": self.parent._id()
         }
         raw = self.session.request('POST',
-                                    '{0}/user/matches/{1}?locale=en'.format(self.parent.base_address, self.id),
+                                    '{0}/user/matches/{1}?locale=en'.format(self.parent.BASE_ADDRESS, self.id),
                                     headers=self.parent.headers,
                                     data=data)
         return raw.json()
 
     def remove(self):
         raw = self.session.request('DELETE',
-                                   '{0}}/user/matches/{1}?locale=en'.format(self.parent.base_address, self.id),
+                                   '{0}/user/matches/{1}?locale=en'.format(self.parent.BASE_ADDRESS, self.id),
                                     headers=self.parent.headers)
         return raw.json()
 
