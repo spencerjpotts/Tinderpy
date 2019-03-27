@@ -8,7 +8,7 @@
         python test.py
 
     @caution-warning
-     beaware of leaving text script running for long periods of time. 
+     beware of leaving (this) script running for long periods of time. 
      MAY CAUSE ACCOUNT PUNISHMENT.
 '''
 
