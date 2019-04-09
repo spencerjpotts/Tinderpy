@@ -119,6 +119,3 @@ If you find a bug in the bot, please search our issue tracker first. If it has n
 **_Tinderpy_** is intended for academic purposes and should not be used as it violates the TOS and is unfair to the community. 
 
 **_Use the bot at your own risk._**
-
-# Donate
-[![](https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NUM5LS6HQ5CCQ&currency_code=AUD&source=url)
