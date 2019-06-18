@@ -1,4 +1,5 @@
 .idea/
+tinderpy/__pycache__/
 __pycache__/
 tinderpy.pyc
 venv/
